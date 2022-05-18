@@ -42,6 +42,11 @@ describe "Merchants API" do
     end
 
     xit "returns 404 when merchant ID doesn't exist" do
+      # Ask meg about this!
+      # How can we write an RSpec test to expect a 404?
+      # This test just returns "Cannot find merchant with ID 400"
+      # This is essentially what I want, but I can't figure out how to write
+      # it in such a way it will actually pass by telling me that merchant can't be found.
       create_list(:merchant, 3)
 
       get '/api/v1/merchants/400'
