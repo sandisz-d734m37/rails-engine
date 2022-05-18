@@ -1,12 +1,12 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/models/customer.rb": {
+      "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/models/merchant.rb": {
         "lines": [
           1,
           1,
-          null,
           1,
+          null,
           1,
           1,
           1,
@@ -20,72 +20,114 @@
           null
         ]
       },
-      "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/models/invoice_item.rb": {
+      "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/controllers/api/v1/merchants_controller.rb": {
         "lines": [
           1,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/models/invoice.rb": {
-        "lines": [
-          1,
-          1,
-          1,
           null,
           1,
           1,
           null,
-          1,
-          null
-        ]
-      },
-      "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/models/item.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/models/merchant.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null,
-          1,
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/models/transaction.rb": {
-        "lines": [
-          1,
-          1,
           null,
           null,
-          1,
-          1,
-          1,
-          1,
           null
         ]
       },
       "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/controllers/application_controller.rb": {
         "lines": [
+          1,
+          null
+        ]
+      },
+      "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/serializers/merchant_serializer.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          3,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/models/invoice.rb": {
+        "lines": [
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/models/item.rb": {
+        "lines": [
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/models/customer.rb": {
+        "lines": [
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/models/invoice_item.rb": {
+        "lines": [
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/models/transaction.rb": {
+        "lines": [
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          0,
           0,
           0
         ],
@@ -93,6 +135,6 @@
         }
       }
     },
-    "timestamp": 1652842152
+    "timestamp": 1652856518
   }
 }
