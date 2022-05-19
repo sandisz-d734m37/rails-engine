@@ -87,4 +87,39 @@ describe "Items API" do
       expect(item[:attributes][:unit_price]).to eq(1.0)
     end
   end
+
+  context "Update" do
+    it "can update an item" do
+      faker_test_merchant = create(:merchant)
+      faker_test_item = create(:item, {merchant_id: faker_test_merchant.id})
+
+      put "/api/v1/items/#{faker_test_item.id}", params: {
+        item:
+        {
+         name: "Test Item",
+         description: "Test item descricption",
+         unit_price: 1.0,
+         merchant_id: faker_test_merchant.id
+         }
+       }
+
+      response_body = JSON.parse(response.body, symbolize_names: true)
+      item = response_body[:data]
+
+      expect(item).to have_key(:id)
+      expect(item[:id]).to be_a(String)
+
+      expect(item).to have_key(:type)
+      expect(item[:type]).to eq("item")
+
+      expect(item[:attributes]).to have_key(:name)
+      expect(item[:attributes][:name]).to eq("Test Item")
+
+      expect(item[:attributes]).to have_key(:description)
+      expect(item[:attributes][:description]).to eq("Test item descricption")
+
+      expect(item[:attributes]).to have_key(:unit_price)
+      expect(item[:attributes][:unit_price]).to eq(1.0)
+    end
+  end
 end
