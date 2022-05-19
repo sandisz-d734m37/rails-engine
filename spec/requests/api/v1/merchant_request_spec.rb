@@ -63,4 +63,35 @@ describe "Merchants API" do
       expect(items[0][:attributes][:name]).to eq("Item 1")
     end
   end
+
+  describe 'GET api/v1/merchants/find' do
+
+    it 'returns the first merchant matching the search' do
+      merchant_1 = Merchant.create!(name: 'Turing')
+      merchant_2 = Merchant.create!(name: 'The Ring Corp')
+
+      get "/api/v1/merchants/find", params: { name: 'ring' }
+      merchant = JSON.parse(response.body, symbolize_names: true)[:data]
+      expect(merchant[:type]).to eq('merchant')
+      expect(merchant[:id]).to be_a String
+      expect(merchant[:attributes][:name]).to eq('Ring World')
+    end
+
+    context 'when it cannot find a merchant' do
+      before { get "/api/v1/merchants/find", params: { name: 'NOTAMERCHANT' } }
+      it 'returns 404 and error message' do
+        expect(response.body).to eq("Unable to find Merchant")
+        expect(response).to have_http_status(404)
+      end
+    end
+
+    context 'when the search field is blank' do
+      before { get "/api/v1/merchants/find", params: { name: '' } }
+      it 'returns 400 and error message' do
+        expect(response.body).to match(/Search field can't be blank/)
+        expect(response.status).to eq(400)
+      end
+    end
+
+  end
 end
