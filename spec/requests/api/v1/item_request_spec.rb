@@ -97,9 +97,7 @@ describe "Items API" do
         item:
         {
          name: "Test Item",
-         description: "Test item descricption",
-         unit_price: 1.0,
-         merchant_id: faker_test_merchant.id
+         description: "Test item descricption"
          }
        }
 
@@ -117,9 +115,6 @@ describe "Items API" do
 
       expect(item[:attributes]).to have_key(:description)
       expect(item[:attributes][:description]).to eq("Test item descricption")
-
-      expect(item[:attributes]).to have_key(:unit_price)
-      expect(item[:attributes][:unit_price]).to eq(1.0)
     end
   end
 end

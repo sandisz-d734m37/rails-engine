@@ -22,6 +22,18 @@ class Api::V1::ItemsController < ApplicationController
     end
   end
 
+  def update
+    item = Item.find(params[:id])
+
+    item.update(item_params)
+
+    if item.save
+      render json: ItemSerializer.new(item)#, status: :updated
+    else
+      render json: item.errors, status: :bad_request
+    end
+  end
+
   private
 
   def item_params
