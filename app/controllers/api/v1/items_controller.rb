@@ -1,9 +1,5 @@
 class Api::V1::ItemsController < ApplicationController
   before_action :set_item, only: %i[show destroy update]
-  # def index
-  #   @merchant = Merchant.find(params[:merchant_id])
-  #   render json: ItemSerializer.new(@merchant.items)
-  # end
 
   def index
     render json: ItemSerializer.new(Item.all)
