@@ -4,7 +4,6 @@ describe "Merchants API" do
   context "index" do
     it "Returns all merchants" do
       create_list(:merchant, 3)
-      # binding.pry
       get '/api/v1/merchants'
 
       response_body = JSON.parse(response.body, symbolize_names: true)
@@ -25,28 +24,25 @@ describe "Merchants API" do
 
   context "show" do
     it "Returns one merchant based on the ID" do
-      create_list(:merchant, 3)
-      # binding.pry
-      get '/api/v1/merchants/4'
+      merchants = create_list(:merchant, 3)
+
+      get "/api/v1/merchants/#{merchants[2].id}"
 
       response_body = JSON.parse(response.body, symbolize_names: true)
       merchant = response_body[:data]
-      # binding.pry
+
       expect(response).to be_successful
 
       expect(merchant).to have_key(:id)
-      expect(merchant[:id]).to eq("4")
+      expect(merchant[:id]).to be_a(String)
 
       expect(merchant[:attributes]).to have_key(:name)
       expect(merchant[:attributes][:name]).to be_a(String)
     end
 
-    xit "returns 404 when merchant ID doesn't exist" do
-      create_list(:merchant, 3)
-
+    it "returns 404 when merchant ID doesn't exist" do
       get '/api/v1/merchants/400'
-
-      response_body = JSON.parse(response.body, symbolize_names: true)
+      expect(response).to have_http_status(404)
     end
   end
 
@@ -58,7 +54,7 @@ describe "Merchants API" do
       faker_test_merchants[1].items.create!(name: "Item 2", description: "Item 2 Belonging to First Faker Merchant", unit_price: "2.0")
       faker_test_merchants[2].items.create!(name: "Item 3", description: "Item 3 Belonging to Second Faker Merchant", unit_price: "3.0")
 
-      get '/api/v1/merchants/8/items'
+      get "/api/v1/merchants/#{faker_test_merchants[1].id}/items"
 
       response_body = JSON.parse(response.body, symbolize_names: true)
       items = response_body[:data]
