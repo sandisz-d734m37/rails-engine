@@ -1,4 +1,5 @@
 class Api::V1::ItemsController < ApplicationController
+  before_action :set_item, only: %i[show destroy update]
   # def index
   #   @merchant = Merchant.find(params[:merchant_id])
   #   render json: ItemSerializer.new(@merchant.items)
@@ -9,7 +10,7 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def show
-    render json: ItemSerializer.new(Item.find(params[:id]))
+    render json: ItemSerializer.new(@item)
   end
 
   def create
@@ -20,6 +21,11 @@ class Api::V1::ItemsController < ApplicationController
     else
       render json: item.errors, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @item.destroy!
+    head :no_content
   end
 
   def update
@@ -35,6 +41,10 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   private
+
+  def set_item
+    @item = Item.find(params[:id])
+  end
 
   def item_params
     params.require(:item).permit(:name, :description, :unit_price, :merchant_id)
