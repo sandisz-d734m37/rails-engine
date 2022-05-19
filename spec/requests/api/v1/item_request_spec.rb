@@ -150,4 +150,42 @@ describe "Items API" do
       expect(merchant[:attributes][:name]).to be_a(String)
     end
   end
+
+  describe 'GET api/v1/items/find_all' do
+
+    it 'returns the first merchant matching the search' do
+      faker_test_merchant = create(:merchant)
+      item_1 = Item.create!(name: 'B Gold Ring', description: "This should be found", unit_price: 35.00, merchant_id: faker_test_merchant.id)
+      item_2 = Item.create!(name: 'A Silver Ring', description: "This too", unit_price: 35.00, merchant_id: faker_test_merchant.id)
+      item_3 = Item.create!(name: 'C Macaroni and Cheese', description: "Not this tho", unit_price: 35.00, merchant_id: faker_test_merchant.id)
+
+      get "/api/v1/items/find_all", params: { name: 'ring' }
+
+      items = JSON.parse(response.body, symbolize_names: true)[:data]
+      items.each do |item|
+        expect(item[:type]).to eq('item')
+        expect(item[:id]).to be_a String
+        expect(item[:attributes][:name]).to eq('A The Ring Corp')
+      end
+    end
+
+    context 'when it cannot find an item' do
+      before { get "/api/v1/items/find_all", params: { name: 'NOITEMHASTHISNAME' } }
+      it 'returns 404 and error message' do
+        response_data = JSON.parse(response.body, symbolize_names: true)[:data]
+
+        expect(response_data[:message]).to eq("Unable to find Items")
+        expect(response).to have_http_status(404)
+      end
+    end
+
+    context 'when the search field is blank' do
+      before { get "/api/v1/items/find_all", params: { name: '' } }
+      it 'returns 400 and error message' do
+        expect(response.body).to match("Search field can't be blank")
+        expect(response.status).to eq(400)
+      end
+    end
+
+  end
 end
