@@ -154,23 +154,17 @@
           null
         ]
       },
-      "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/controllers/api/v1/merchants_controller.rb": {
+      "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/controllers/api/v1/merchant_items_controller.rb": {
         "lines": [
           1,
-          null,
           1,
-          1,
-          null,
-          null,
           1,
           1,
           null,
           null,
-          null,
-          null,
-          null,
-          null,
-          null,
+          1,
+          1,
+          1,
           null,
           null
         ]
@@ -197,17 +191,28 @@
           null
         ]
       },
-      "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/controllers/api/v1/merchant_items_controller.rb": {
+      "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/controllers/api/v1/merchants_controller.rb": {
         "lines": [
           1,
+          null,
           1,
           1,
+          null,
+          null,
           1,
+          2,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
           null,
           null
         ]
       }
     },
-    "timestamp": 1652935112
+    "timestamp": 1652937161
   }
 }

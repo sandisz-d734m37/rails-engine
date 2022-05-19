@@ -5,9 +5,7 @@ describe "Items API" do
     it "returns all items" do
       faker_test_merchant = create(:merchant)
       faker_test_items = create_list(:item, 3, {merchant_id: faker_test_merchant.id})
-      # I'm already using the ItemsController Index function for the Merchant Items Index
-      # (merchants/:merchant_id/items)
-      # Where can I move this action so that I can do a normal Item Index as well as Merchant Items Index?
+
       get "/api/v1/items"
 
       response_body = JSON.parse(response.body, symbolize_names: true)
@@ -125,7 +123,31 @@ describe "Items API" do
 
       delete "/api/v1/items/#{faker_test_item.id}"
 
+
       expect(response).to have_http_status(204)
+    end
+  end
+
+  context "Items/:id/Merchant" do
+    it "returns a merchant" do
+      faker_test_merchant = create(:merchant)
+      faker_test_item = create(:item, {merchant_id: faker_test_merchant.id})
+
+      get "/api/v1/items/#{faker_test_item.id}/merchant"
+      expect(response).to have_http_status(200)
+
+      response_body = JSON.parse(response.body, symbolize_names: true)
+      merchant = response_body[:data]
+
+
+      expect(merchant).to have_key(:id)
+      expect(merchant[:id]).to be_a(String)
+
+      expect(merchant).to have_key(:type)
+      expect(merchant[:type]).to eq("merchant")
+
+      expect(merchant[:attributes]).to have_key(:name)
+      expect(merchant[:attributes][:name]).to be_a(String)
     end
   end
 end

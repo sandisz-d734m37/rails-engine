@@ -40,19 +40,9 @@ describe "Merchants API" do
       expect(merchant[:attributes][:name]).to be_a(String)
     end
 
-    xit "returns 404 when merchant ID doesn't exist" do
-      # Ask meg about this!
-      # How can we write an RSpec test to expect a 404?
-      # This test just returns "Cannot find merchant with ID 400"
-      # This is essentially what I want, but I can't figure out how to write
-      # it in such a way it will actually pass by telling me that merchant can't be found.
-      # create_list(:merchant, 3)
-
+    it "returns 404 when merchant ID doesn't exist" do
       get '/api/v1/merchants/400'
-
-      response_body = JSON.parse(response.body, symbolize_names: true)
-
-      # binding.pry
+      expect(response).to have_http_status(404)
     end
   end
 
