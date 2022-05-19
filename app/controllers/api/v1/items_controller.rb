@@ -1,6 +1,5 @@
 class Api::V1::ItemsController < ApplicationController
   before_action :set_item, only: %i[show destroy update]
-
   def index
     render json: ItemSerializer.new(Item.all)
   end
@@ -30,7 +29,7 @@ class Api::V1::ItemsController < ApplicationController
     item.update(item_params)
 
     if item.save
-      render json: ItemSerializer.new(item)#, status: :updated
+      render json: ItemSerializer.new(item)
     else
       render json: item.errors, status: :bad_request
     end

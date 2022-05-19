@@ -11,11 +11,11 @@ describe Merchant do
 
   context "class methods" do
     describe '#search' do
-      it 'returns a single merchant based off their name' do
+      it 'returns merchants based off their name' do
         merchants = create_list(:merchant, 10)
         name = merchants.first.name
 
-        actual = Merchant.search(name)
+        actual = Merchant.search(name).first
         expected = merchants.first
 
         expect(actual).to eq(expected)

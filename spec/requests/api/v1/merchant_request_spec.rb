@@ -67,20 +67,22 @@ describe "Merchants API" do
   describe 'GET api/v1/merchants/find' do
 
     it 'returns the first merchant matching the search' do
-      merchant_1 = Merchant.create!(name: 'Turing')
-      merchant_2 = Merchant.create!(name: 'The Ring Corp')
+      merchant_1 = Merchant.create!(name: 'B Turing')
+      merchant_2 = Merchant.create!(name: 'A The Ring Corp')
 
       get "/api/v1/merchants/find", params: { name: 'ring' }
       merchant = JSON.parse(response.body, symbolize_names: true)[:data]
       expect(merchant[:type]).to eq('merchant')
       expect(merchant[:id]).to be_a String
-      expect(merchant[:attributes][:name]).to eq('Ring World')
+      expect(merchant[:attributes][:name]).to eq('A The Ring Corp')
     end
 
     context 'when it cannot find a merchant' do
       before { get "/api/v1/merchants/find", params: { name: 'NOTAMERCHANT' } }
       it 'returns 404 and error message' do
-        expect(response.body).to eq("Unable to find Merchant")
+        response_data = JSON.parse(response.body, symbolize_names: true)[:data]
+        
+        expect(response_data[:message]).to eq("Unable to find Merchant")
         expect(response).to have_http_status(404)
       end
     end
