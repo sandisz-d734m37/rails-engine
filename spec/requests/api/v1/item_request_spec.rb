@@ -3,37 +3,53 @@ require "rails_helper"
 describe "Items API" do
   context "Index" do
     it "returns all items" do
+      faker_test_merchant = create(:merchant)
+      faker_test_items = create_list(:item, 3, {merchant_id: faker_test_merchant.id})
       # I'm already using the ItemsController Index function for the Merchant Items Index
       # (merchants/:merchant_id/items)
       # Where can I move this action so that I can do a normal Item Index as well as Merchant Items Index?
+      get "/api/v1/items"
+
+      response_body = JSON.parse(response.body, symbolize_names: true)
+      items = response_body[:data]
+
+      expect(items.length).to eq(3)
+
+      items.each do |item|
+        expect(item).to have_key(:id)
+        expect(item[:id]).to be_a(String)
+
+        expect(item[:attributes]).to have_key(:name)
+        expect(item[:attributes][:name]).to be_a(String)
+
+        expect(item[:attributes]).to have_key(:description)
+        expect(item[:attributes][:description]).to be_a(String)
+
+        expect(item[:attributes]).to have_key(:unit_price)
+        expect(item[:attributes][:unit_price]).to be_a(Float)
+      end
     end
   end
 
   context "Show" do
     it "Returns an item specified by ID" do
-      faker_test_merchant = create_list(:merchant, 1)
-      # faker_test_items = create_list(:item, 3)
-      # How can we create a list of items with Faker?
-      # I keep getting a "Merchant must exist" error
+      faker_test_merchant = create(:merchant)
+      faker_test_items = create_list(:item, 2, {merchant_id: faker_test_merchant.id})
 
-      item1 = faker_test_merchant[0].items.create!(name: "Item 1", description: "Item 1 Belonging to First Faker Merchant", unit_price: 1.0)
-      item2 = faker_test_merchant[0].items.create!(name: "Item 2", description: "Item 2 Belonging to First Faker Merchant", unit_price: 2.0)
-
-      get "/api/v1/items/#{item1.id}"
+      get "/api/v1/items/#{faker_test_items[1].id}"
 
       response_body = JSON.parse(response.body, symbolize_names: true)
       item = response_body[:data]
 
       expect(item[:attributes]).to have_key(:name)
-      expect(item[:attributes][:name]).to eq("Item 1")
+      expect(item[:attributes][:name]).to be_a(String)
 
       expect(item[:attributes]).to have_key(:description)
-      expect(item[:attributes][:description]).to eq("Item 1 Belonging to First Faker Merchant")
+      expect(item[:attributes][:description]).to be_a(String)
 
       expect(item[:attributes]).to have_key(:unit_price)
-      expect(item[:attributes][:unit_price]).to eq(1.0)
-      # expect(item[:attributes][:unit_price]).to eq("1.0")
-      # I thought this was supposed to return a string?
+      expect(item[:attributes][:unit_price]).to be_a(Float)
+
     end
   end
 

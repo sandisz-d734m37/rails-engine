@@ -4,7 +4,6 @@ describe "Merchants API" do
   context "index" do
     it "Returns all merchants" do
       create_list(:merchant, 3)
-      # binding.pry
       get '/api/v1/merchants'
 
       response_body = JSON.parse(response.body, symbolize_names: true)
@@ -53,7 +52,7 @@ describe "Merchants API" do
 
       response_body = JSON.parse(response.body, symbolize_names: true)
 
-      binding.pry
+      # binding.pry
     end
   end
 

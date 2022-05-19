@@ -87,13 +87,13 @@
       "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/controllers/api/v1/items_controller.rb": {
         "lines": [
           1,
+          null,
+          null,
+          null,
+          null,
+          null,
           1,
           1,
-          1,
-          null,
-          null,
-          null,
-          null,
           null,
           null,
           1,
@@ -174,8 +174,18 @@
           null,
           null
         ]
+      },
+      "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/controllers/api/v1/merchant_items_controller.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
       }
     },
-    "timestamp": 1652929469
+    "timestamp": 1652931738
   }
 }
