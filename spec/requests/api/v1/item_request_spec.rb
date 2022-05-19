@@ -117,4 +117,15 @@ describe "Items API" do
       expect(item[:attributes][:description]).to eq("Test item descricption")
     end
   end
+
+  context "Delete" do
+    it "can delete an item" do
+      faker_test_merchant = create(:merchant)
+      faker_test_item = create(:item, {merchant_id: faker_test_merchant.id})
+
+      delete "/api/v1/items/#{faker_test_item.id}"
+
+      expect(response).to have_http_status(204)
+    end
+  end
 end
