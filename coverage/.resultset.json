@@ -1,12 +1,12 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/models/merchant.rb": {
+      "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/models/customer.rb": {
         "lines": [
           1,
           1,
-          1,
           null,
+          1,
           1,
           1,
           1,
@@ -16,6 +16,32 @@
       "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/models/application_record.rb": {
         "lines": [
           1,
+          1,
+          null
+        ]
+      },
+      "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/models/invoice_item.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/models/invoice.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
           1,
           null
         ]
@@ -33,12 +59,37 @@
           null
         ]
       },
+      "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/models/merchant.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/models/transaction.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
       "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/controllers/api/v1/items_controller.rb": {
         "lines": [
           1,
           1,
-          0,
-          0,
+          1,
+          1,
           null,
           null,
           null,
@@ -47,6 +98,22 @@
           null,
           1,
           1,
+          null,
+          null,
+          1,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          0,
           null,
           null
         ]
@@ -65,70 +132,32 @@
           null
         ]
       },
-      "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/models/invoice.rb": {
+      "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/controllers/api/v1/merchants_controller.rb": {
         "lines": [
-          0,
-          0,
-          0,
+          1,
           null,
-          0,
-          0,
-          null,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/models/customer.rb": {
-        "lines": [
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/models/invoice_item.rb": {
-        "lines": [
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/models/transaction.rb": {
-        "lines": [
-          0,
-          0,
+          1,
+          1,
           null,
           null,
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
       },
       "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/serializers/merchant_serializer.rb": {
         "lines": [
-          0,
-          0,
-          0,
+          1,
+          1,
+          1,
           null,
           null,
           null,
@@ -143,28 +172,10 @@
           null,
           null,
           null,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/controllers/api/v1/merchants_controller.rb": {
-        "lines": [
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
+          null
+        ]
       }
     },
-    "timestamp": 1652898465
+    "timestamp": 1652929469
   }
 }

@@ -3,7 +3,6 @@ require "rails_helper"
 describe "Items API" do
   context "Index" do
     it "returns all items" do
-      # Ask Meg about this!
       # I'm already using the ItemsController Index function for the Merchant Items Index
       # (merchants/:merchant_id/items)
       # Where can I move this action so that I can do a normal Item Index as well as Merchant Items Index?
@@ -35,6 +34,12 @@ describe "Items API" do
       expect(item[:attributes][:unit_price]).to eq(1.0)
       # expect(item[:attributes][:unit_price]).to eq("1.0")
       # I thought this was supposed to return a string?
+    end
+  end
+
+  context "Create" do
+    it "can create an item" do
+
     end
   end
 end
