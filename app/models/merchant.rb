@@ -7,6 +7,6 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
 
   def self.search(name)
-    w = where('name ILIKE ?', "%#{name.downcase}%").order(:name)
+    where('name ILIKE ?', "%#{name.downcase}%").order(:name)
   end
 end

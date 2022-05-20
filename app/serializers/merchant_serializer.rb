@@ -12,7 +12,7 @@ class MerchantSerializer
       }
     }
   }
-end
+  end
 
   # def self.format_merchants(merchants)
   #   {
