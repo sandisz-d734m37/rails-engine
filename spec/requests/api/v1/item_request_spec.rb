@@ -162,10 +162,12 @@ describe "Items API" do
       get "/api/v1/items/find_all", params: { name: 'ring' }
 
       items = JSON.parse(response.body, symbolize_names: true)[:data]
-      items.each do |item|
+      item_name_array = ['A Silver Ring', 'B Gold Ring']
+
+      items.each_with_index do |item, index|
         expect(item[:type]).to eq('item')
         expect(item[:id]).to be_a String
-        expect(item[:attributes][:name]).to eq('A The Ring Corp')
+        expect(item[:attributes][:name]).to eq(item_name_array[index])
       end
     end
 
@@ -174,8 +176,8 @@ describe "Items API" do
       it 'returns 404 and error message' do
         response_data = JSON.parse(response.body, symbolize_names: true)[:data]
 
-        expect(response_data[:message]).to eq("Unable to find Items")
-        expect(response).to have_http_status(404)
+        expect(response_data).to be_an(Array)
+        expect(response_data.empty?).to be true
       end
     end
 
