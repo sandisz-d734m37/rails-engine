@@ -231,7 +231,7 @@ describe "Items API" do
 
   describe 'GET api/v1/items/find (by price)' do
 
-    it 'returns the first item matching the search' do
+    it 'min_price returns one item matching the search' do
       faker_test_merchant = create(:merchant)
       item_1 = Item.create!(name: 'B Gold Ring', description: "This should be found", unit_price: 35.00, merchant_id: faker_test_merchant.id)
       item_2 = Item.create!(name: 'A Silver Ring', description: "This too", unit_price: 55.00, merchant_id: faker_test_merchant.id)
@@ -246,13 +246,28 @@ describe "Items API" do
       expect(item[:attributes][:name]).to eq('A Silver Ring')
     end
 
+    it 'max_price returns the nearest item matching the search' do
+      faker_test_merchant = create(:merchant)
+      item_1 = Item.create!(name: 'B Gold Ring', description: "This should be found", unit_price: 35.00, merchant_id: faker_test_merchant.id)
+      item_2 = Item.create!(name: 'A Silver Ring', description: "This too", unit_price: 49.00, merchant_id: faker_test_merchant.id)
+      item_3 = Item.create!(name: 'C Macaroni and Cheese', description: "Not this tho", unit_price: 51.00, merchant_id: faker_test_merchant.id)
+
+      get "/api/v1/items/find", params: { max_price: 50 }
+
+      item = JSON.parse(response.body, symbolize_names: true)[:data]
+
+      expect(item[:type]).to eq('item')
+      expect(item[:id]).to be_a String
+      expect(item[:attributes][:name]).to eq('A Silver Ring')
+    end
+
     context 'when it cannot find an item' do
-      before { get "/api/v1/items/find", params: { min_price: 5000 } }
+      before { get "/api/v1/items/find", params: { min_price: -5 } }
       it 'returns 404 and an error message' do
         response_data = JSON.parse(response.body, symbolize_names: true)[:data]
 
         expect(response_data[:message]).to eq("Unable to find Item")
-        expect(response).to have_http_status(404)
+        expect(response).to have_http_status(400)
       end
     end
 

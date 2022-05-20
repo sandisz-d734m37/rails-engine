@@ -25,7 +25,7 @@ describe Item do
     end
 
     describe '#search_by_min_price' do
-      it 'returns the closest item to the search' do
+      it 'returns one item' do
         faker_test_merchant = create(:merchant)
         item_1 = Item.create!(name: 'B Gold Ring', description: "This should be found", unit_price: 35.00, merchant_id: faker_test_merchant.id)
         item_2 = Item.create!(name: 'A Silver Ring', description: "This too", unit_price: 55.00, merchant_id: faker_test_merchant.id)
@@ -33,12 +33,12 @@ describe Item do
 
         search = Item.search_by_min_price(50)
 
-        expect(search).to include(item_3)
+        expect(search).to eq(item_2)
       end
     end
 
     describe '#search_by_max_price' do
-      it 'returns the closest item to the search' do
+      it 'returns one item' do
         faker_test_merchant = create(:merchant)
         item_1 = Item.create!(name: 'B Gold Ring', description: "This should be found", unit_price: 35.00, merchant_id: faker_test_merchant.id)
         item_2 = Item.create!(name: 'A Silver Ring', description: "This too", unit_price: 34.00, merchant_id: faker_test_merchant.id)
@@ -46,7 +46,7 @@ describe Item do
 
         search = Item.search_by_max_price(50)
 
-        expect(search).to eq(item_1)
+        expect(search).to eq(item_2)
       end
     end
   end

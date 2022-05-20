@@ -35,49 +35,59 @@ class Api::V1::ItemsController < ApplicationController
     end
   end
 
-  def find
-    if params[:min_price].present?
-      by_price
-    else
-      by_name
-    end
-  end
-
   def find_all
     if !params[:name].blank?
       items = Item.search_by_name(params[:name])
-      if items.first.nil?
-        render json: {
-          data:[]
-        }, status: 404
-      else
-        render json: ItemSerializer.multi_item(items), status: :ok
-      end
+        if items.first.nil?
+          render json: {
+            data:[]
+            }, status: 404
+        else
+          render json: ItemSerializer.multi_item(items), status: :ok
+        end
     else
       render json: { error: { message: "Search field can't be blank"} }, status: :bad_request
     end
   end
 
-  def by_name
-    if !params[:name].blank?
-      items = Item.search_by_name(params[:name])
-      if items.first.nil?
-        render json: {
-          data: {
-            message: "Unable to find Item"
-          }
-        }, status: 404
-      else
-        render json: ItemSerializer.single_item(items.first)
-      end
+  def find
+    if params[:min_price].present? || params[:max_price].present?
+      by_price
+    elsif params[:name].present?
+      by_name
     else
       render json: {error: {message: "Search field can't be blank"}}, status: 400
     end
   end
 
+
+  def by_name
+    items = Item.search_by_name(params[:name])
+    if items.first.nil?
+      render json: {
+        data: {
+          message: "Unable to find Item"
+        }
+      }, status: 404
+    else
+      render json: ItemSerializer.single_item(items.first)
+    end
+  end
+
   def by_price
-    item = Item.search_by_price(params[:min_price])
-    if item.nil?
+    if params[:min_price].present?
+      item = Item.search_by_min_price(params[:min_price])
+    else
+      item = Item.search_by_max_price(params[:max_price])
+    end
+    if item.nil? || params[:max_price].to_f < 0 || params[:min_price].to_f < 0
+      render json: {
+        data: {
+          message: "Unable to find Item"
+        }
+      }, status: 400
+    else
+      render json: ItemSerializer.single_item(item)
     end
   end
 

@@ -10,4 +10,12 @@ class Item < ApplicationRecord
   def self.search_by_name(name)
     where('name ILIKE ?', "%#{name.downcase}%").order(:name)
   end
+
+  def self.search_by_min_price(price)
+    where('unit_price >= ?', price).order(:name).first
+  end
+
+  def self.search_by_max_price(price)
+    where('unit_price <= ?', price).order(:name).first
+  end
 end
