@@ -1,6 +1,5 @@
 class Api::V1::ItemsController < ApplicationController
   before_action :set_item, only: %i[show destroy update]
-
   def index
     render json: ItemSerializer.new(Item.all)
   end
@@ -30,9 +29,24 @@ class Api::V1::ItemsController < ApplicationController
     item.update(item_params)
 
     if item.save
-      render json: ItemSerializer.new(item)#, status: :updated
+      render json: ItemSerializer.new(item)
     else
       render json: item.errors, status: :bad_request
+    end
+  end
+
+  def find_all
+    if !params[:name].blank?
+      items = Item.search(params[:name])
+      if items.first.nil?
+        render json: {
+          data:[]
+        }, status: 404
+      else
+        render json: ItemSerializer.multi_item(items), status: :ok
+      end
+    else
+      render json: { error: { message: "Search field can't be blank"} }, status: :bad_request
     end
   end
 
