@@ -110,7 +110,7 @@ describe "Merchants API" do
       merchants.each_with_index do |merchant, index|
         expect(merchant[:type]).to eq('merchant')
         expect(merchant[:id]).to be_a String
-        expect(merchant[:attributes][:name]).to eq('A The Ring Corp')
+        expect(merchant[:attributes][:name]).to eq(merch_name_array[index])
       end
     end
 

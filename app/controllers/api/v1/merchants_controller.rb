@@ -29,4 +29,20 @@ class Api::V1::MerchantsController < ApplicationController
       render json: { error: { message: "Search field can't be blank'" } }, status: :bad_request
     end
   end
+
+
+  def find_all
+    if !params[:name].blank?
+      merchants = Merchant.search(params[:name])
+      if merchants.first.nil?
+        render json: {
+          data:[]
+        }, status: 404
+      else
+        render json: MerchantSerializer.multi_merchant(merchants), status: :ok
+      end
+    else
+      render json: { error: { message: "Search field can't be blank"} }, status: :bad_request
+    end
+  end
 end
