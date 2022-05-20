@@ -162,8 +162,10 @@ describe "Items API" do
       get "/api/v1/items/find_all", params: { name: 'ring' }
 
       items = JSON.parse(response.body, symbolize_names: true)[:data]
-      item_name_array = ['A Silver Ring', 'B Gold Ring']
 
+      expect(items.length).to eq(2)
+
+      item_name_array = ['A Silver Ring', 'B Gold Ring']
       items.each_with_index do |item, index|
         expect(item[:type]).to eq('item')
         expect(item[:id]).to be_a String
