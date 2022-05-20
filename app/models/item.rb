@@ -7,7 +7,7 @@ class Item < ApplicationRecord
   has_many :transactions, through: :invoices
   has_many :customers, through: :invoices
 
-  def self.search(name)
+  def self.search_by_name(name)
     where('name ILIKE ?', "%#{name.downcase}%").order(:name)
   end
 end

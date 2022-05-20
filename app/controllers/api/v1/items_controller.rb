@@ -35,9 +35,17 @@ class Api::V1::ItemsController < ApplicationController
     end
   end
 
+  def find
+    if params[:min_price].present?
+      by_price
+    else
+      by_name
+    end
+  end
+
   def find_all
     if !params[:name].blank?
-      items = Item.search(params[:name])
+      items = Item.search_by_name(params[:name])
       if items.first.nil?
         render json: {
           data:[]
@@ -50,9 +58,9 @@ class Api::V1::ItemsController < ApplicationController
     end
   end
 
-  def find
+  def by_name
     if !params[:name].blank?
-      items = Item.search(params[:name])
+      items = Item.search_by_name(params[:name])
       if items.first.nil?
         render json: {
           data: {
@@ -64,6 +72,12 @@ class Api::V1::ItemsController < ApplicationController
       end
     else
       render json: {error: {message: "Search field can't be blank"}}, status: 400
+    end
+  end
+
+  def by_price
+    item = Item.search_by_price(params[:min_price])
+    if item.nil?
     end
   end
 
