@@ -50,6 +50,24 @@ class Api::V1::ItemsController < ApplicationController
     end
   end
 
+  def find
+    if !params[:name].blank?
+      items = Item.search(params[:name])
+      if items.first.nil?
+        render json: {
+          data: {
+            message: "Unable to find Item"
+          }
+        }, status: 404
+      else
+        render json: ItemSerializer.single_item(items.first)
+      end
+    else
+      render json: {error: {message: "Search field can't be blank"}}, status: 400
+    end
+  end
+
+
   private
 
   def set_item
