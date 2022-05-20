@@ -94,7 +94,6 @@ describe "Merchants API" do
         expect(response.status).to eq(400)
       end
     end
-
   end
 
   describe 'GET api/v1/merchants/find_all' do
