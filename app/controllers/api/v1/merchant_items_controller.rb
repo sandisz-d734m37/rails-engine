@@ -1,6 +1,6 @@
 class Api::V1::MerchantItemsController < ApplicationController
   def index
-    if Merchant.where(id: params[:merchant_id]).empty?
+    if !Merchant.exists?(params[:merchant_id])
       render json: {
           error: "No such merchant; check the entered ID",
           status: 404
