@@ -11,6 +11,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :merchants, only: [:index, :show]
       resources :items, only: [:show, :create, :index, :update, :destroy]
+      namespace :revenue do
+        resources :merchants, only: [:index]
+      end
     end
   end
 end

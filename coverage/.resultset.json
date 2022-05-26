@@ -76,6 +76,11 @@
           1,
           5,
           null,
+          null,
+          1,
+          null,
+          0,
+          null,
           null
         ]
       },
@@ -349,8 +354,18 @@
           null,
           null
         ]
+      },
+      "/Users/sandiszthieme/turing/3module/projects/rails-engine/app/controllers/api/v1/revenue/merchants_controller.rb": {
+        "lines": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
       }
     },
-    "timestamp": 1653023394
+    "timestamp": 1653584221
   }
 }
