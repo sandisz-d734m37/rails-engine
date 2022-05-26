@@ -10,8 +10,23 @@ class Merchant < ApplicationRecord
     where('name ILIKE ?', "%#{name.downcase}%").order(:name)
   end
 
-  def self.top_merchants_by_revenue(number)
+  def self.top_merchants_by_revenue(quantity)
     # Merchant.invoice_items.joins(:transactions)
-    joins(invoice_items: [:invoices, :transactions])
+    select('merchants.*, SUM(invoice_items.quantity * invoice_items.unit_price) as revenue')
+    .joins(invoices: [:invoice_items, :transactions])
+    .group(:id)
+    .where(transactions: {result: 'success'}, invoices: {status: 'shipped'},)
+    .order(revenue: :desc)
+    .limit(quantity)
   end
+
+  def self.top_merchants_by_items_sold(quantity = 5)
+    select('merchants.*, SUM(invoice_items.quantity) AS item_count')
+    .joins(invoices: [:invoice_items, :transactions])
+    .group(:id)
+    .where(transactions: {result: 'success'}, invoices: {status: 'shipped'})
+    .order(item_count: :desc)
+    .limit(quantity)
+  end
+
 end
