@@ -11,11 +11,10 @@ class Merchant < ApplicationRecord
   end
 
   def self.top_merchants_by_revenue(quantity)
-    # Merchant.invoice_items.joins(:transactions)
     select('merchants.*, SUM(invoice_items.quantity * invoice_items.unit_price) as revenue')
     .joins(invoices: [:invoice_items, :transactions])
     .group(:id)
-    .where(transactions: {result: 'success'}, invoices: {status: 'shipped'},)
+    .where(transactions: {result: 'success'}, invoices: {status: 'shipped'})
     .order(revenue: :desc)
     .limit(quantity)
   end
@@ -27,6 +26,17 @@ class Merchant < ApplicationRecord
     .where(transactions: {result: 'success'}, invoices: {status: 'shipped'})
     .order(item_count: :desc)
     .limit(quantity)
+  end
+
+  def total_revenue
+    # select('merchants.*, SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue')
+    # .joins(invoices: [:invoice_items, :transactions])
+    # .group(:id)
+    # .where
+    invoice_items
+    .joins(:transactions)
+    .where(transactions: {result: 'success'}, invoices: {status: 'shipped'})
+    .sum('(invoice_items.quantity * invoice_items.unit_price)')
   end
 
 end
