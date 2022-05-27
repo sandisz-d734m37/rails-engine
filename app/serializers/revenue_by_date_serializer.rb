@@ -1,12 +1,16 @@
 class RevenueByDateSerializer
   include JSONAPI::Serializer
-
-  def self.revenue_by_date(revenue)
+  # binding.pry
+  # attributes :revenue do |object|
+  #   object.total
+  # end
+  def self.revenue(revenue)
     {
       "data": {
         "id": nil,
+        "type": 'revenue',
         "attributes": {
-          "revenue": revenue.revenue
+          "revenue": revenue
         }
       }
     }
