@@ -5,5 +5,6 @@ class Api::V1::Revenue::MerchantsController < ApplicationController
   end
 
   def show
+    merchant = Merchant.find(params[:id])
   end
 end
