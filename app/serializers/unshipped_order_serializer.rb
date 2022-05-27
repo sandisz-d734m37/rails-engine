@@ -1,4 +1,6 @@
 class UnshippedOrderSerializer
   include JSONAPI::Serializer
-  attributes 
+  attributes :potential_revenue do |invoice|
+    invoice.potential_revenue
+  end
 end
